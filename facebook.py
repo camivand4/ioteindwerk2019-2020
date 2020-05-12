@@ -1,13 +1,19 @@
 from selenium import webdriver
 from sense_hat import SenseHat
+from env import *
+import pyautogui
+from time import sleep
+from selenium.webdriver.chrome.options import Options
+
+options = webdriver.ChromeOptions()
+prefs = {"profile.default_content_setting_values.notifications" : 2}
+options.add_experimental_option("prefs",prefs)
 
 sense = SenseHat()
 
-sense.show_message("hi")
+print("don't forget to read the .readme file")
 
-print("don't forget to fill in your email and password")
-
-driver = webdriver.Chrome()
+driver = webdriver.Chrome(options=options)
 driver.get('https://facebook.com')
 
 email = driver.find_element_by_xpath('//*[@id="email"]')
@@ -18,11 +24,10 @@ email.send_keys(loginfacebook)
 password.send_keys(passwordfacebook)
 enterbtn.click()
 
-amountofmessages = driver.find_element_by_xpath
-('//*[@id="mercurymessagesCountValue"]').text()
-notif = amountofmessages
-if notif > 0:
-    sense.show_message("You got a message")
-else:
-    sense.show_message("Error")
+sense.show_message("facebook")
+
+messagebtnreal = driver.find_element_by_xpath('/html/body/div[1]/div[2]/div/div[1]/div/div/div/div[2]/div[2]/div[2]/div/a/div').text
+messagebtn = driver.find_element_by_xpath('/html/body/div[1]/div[2]/div/div[1]/div/div/div/div[2]/div[2]/div[2]/div/a/div/span/span')
+#messagebtnreal.click()
+print(messagebtn)
 
