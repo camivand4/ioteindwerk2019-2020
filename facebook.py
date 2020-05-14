@@ -11,6 +11,20 @@ options.add_experimental_option("prefs",prefs)
 
 sense = SenseHat()
 
+X = [255, 255, 255]
+O = [91, 110, 225]
+
+facebookpixels = [
+O, O, O, O, O, O, O, O,
+O, O, O, O, O, X, X, O,
+O, O, O, O, X, O, O, O,
+O, O, O, O, X, O, O, O,
+O, O, O, X, X, X, X, O,
+O, O, O, O, X, O, O, O,
+O, O, O, O, X, O, O, O,
+O, O, O, O, X, O, O, O
+]
+
 print("don't forget to read the .readme file")
 
 driver = webdriver.Chrome(options=options)
@@ -24,10 +38,29 @@ email.send_keys(loginfacebook)
 password.send_keys(passwordfacebook)
 enterbtn.click()
 
-sense.show_message("facebook")
+sleep(5)
 
-messagebtnreal = driver.find_element_by_xpath('/html/body/div[1]/div[2]/div/div[1]/div/div/div/div[2]/div[2]/div[2]/div/a/div').text
-messagebtn = driver.find_element_by_xpath('/html/body/div[1]/div[2]/div/div[1]/div/div/div/div[2]/div[2]/div[2]/div/a/div/span/span')
-#messagebtnreal.click()
-print(messagebtn)
+def facebook_look():
+    pyautogui.hotkey('ctrl','r')    
+    sleep(10)
+    
+    messagebtn = driver.find_element_by_xpath('/html/body/div[1]/div[2]/div/div[1]/div/div/div/div[2]/div[2]/div[2]/div/a/div/span/span').text
+
+    if(messagebtn == ""):
+        sense.clear()
+    else:
+        sense.set_pixels(facebookpixels)
+
+    facebook_look()
+
+def facebook_look_first():
+    messagebtn = driver.find_element_by_xpath('/html/body/div[1]/div[2]/div/div[1]/div/div/div/div[2]/div[2]/div[2]/div/a/div/span/span').text
+    
+    if(messagebtn == ""):
+        sense.clear()
+    else:
+        sense.set_pixels(facebookpixels)
+    facebook_look()
+
+facebook_look_first()
 

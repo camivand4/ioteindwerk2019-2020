@@ -1,5 +1,9 @@
-change the env.txt to .env
-change FACBOOKUSERNAMEHERE to your facebook username do the same thing for everything in capital
-
 pip install selenium
 sudo apt-get install chromium-chromedriver
+py -m pip install pyautogui
+
+change the env.txt to env.py
+change CHANGEHERE to the info needed
+
+run facebook.py or discord.py
+
